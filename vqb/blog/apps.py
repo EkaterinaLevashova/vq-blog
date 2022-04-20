@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class VqbAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'vqb_app'
+    name = 'blog'
