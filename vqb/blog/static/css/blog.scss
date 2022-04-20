@@ -1,0 +1,105 @@
+$base-color: #242424;
+$second-color: #F59D22FF;
+$link-color: #cf1d1d;
+
+$base-color-l-100: lighten($base-color, 100%);
+$base-color-l-90: lighten($base-color, 90%);
+$base-color-l-80: lighten($base-color, 80%);
+$base-color-l-70: lighten($base-color, 70%);
+$base-color-l-60: lighten($base-color, 60%);
+$base-color-l-50: lighten($base-color, 50%);
+$base-color-l-40: lighten($base-color, 40%);
+$base-color-l-30: lighten($base-color, 30%);
+$base-color-l-20: lighten($base-color, 20%);
+$base-color-l-10: lighten($base-color, 10%);
+
+body {
+  font-family: 'Montserrat', monospace;
+  background-color: #161616;
+  color: lighten($second-color, 90%);
+}
+
+h1 {
+  color: $base-color-l-70;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+a {
+  color: $link-color;
+  &:hover {
+    color: $second-color;
+  }
+}
+
+.block {
+  border-radius: 0.4rem;
+  padding: 1rem 2rem;
+  margin-bottom: 2rem;
+  &_theme {
+    color: $base-color-l-70;
+    background-color: $base-color;
+  }
+}
+
+.post {
+  &_preview {
+    border-bottom: $second-color 1rem solid;
+    transition: all 1s ease-out 100ms;
+    &:hover {
+      color: $base-color-l-10;
+      background-color: $second-color;
+      a {
+        color: darken($link-color, 20%);
+        &:hover {
+          color: darken($link-color, 50%);
+        }
+      }
+    }
+  }
+}
+
+.comment {
+  &_theme {
+      color: $base-color;
+      background-color: $second-color;
+      a {
+        color: darken($link-color, 20%);
+        &:hover {
+          color: darken($link-color, 50%);
+        }
+      }
+  }
+}
+
+.nav-link {
+  color: lighten($base-color, 40%)!important;
+  &:hover {
+    color: $second-color!important;
+  }
+}
+
+
+.effect-underline:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  display: inline-block;
+  height: 1em;
+  width: 100%;
+  border-bottom: 1px solid;
+  margin-top: 10px;
+  opacity: 0;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+  transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: scale(0,1);
+  transform: scale(0,1);
+}
+
+.effect-underline:hover:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+}
+
