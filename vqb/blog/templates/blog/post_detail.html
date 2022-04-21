@@ -9,43 +9,43 @@
                 {{ post.published_date }}
             </div>
         {% else %}
-            <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-default">Publish</a>
+            <a href="{% url 'post_publish' pk=post.pk %}" class="btn btn-primary">Publish</a>
         {% endif %}
 
-        <p class="post_content">{{ post.title|safe|linebreaksbr }}</p>
-
-        {% if user.is_authenticated %}
-            <a href="{% url 'post_edit' pk=post.pk %}" class="btn btn-primary">
-                <span class="glyphicon glyphicon-pencil"></span> {# need to icon #}
-            </a>
-            <a href="{% url 'post_remove' pk=post.pk %}" class="btn btn-primary">
-                <span class="glyphicon glyphicon-remove"></span> {# need to icon #}
-            </a>
-        {% endif %}
-
+        <p class="post_content">{{ post.text|safe|linebreaksbr }}</p>
         <hr>
-
-        <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="btn btn-primary btn-comment">Add comment</a>
+        {% if user.is_authenticated %}
+            <div class="d-flex justify-content-between">
+                <a href="{% url 'post_edit' pk=post.pk %}" class="button button-edit">Edit</a>
+                <a href="{% url 'post_remove' pk=post.pk %}" class="button button-remove">Remove</a>
+            </div>
+        {% endif %}
     </div>
-    <div class="block comment_theme">
-        {% for comment in post.comments.all %}
-            {% if user.is_authenticated or comment.approved_comment %}
-                {{ comment.created_date }}
-                {% if not comment.approved_commed %}
-                    <a href="{% url 'comment_remove' pk=comment.pk %}" class="btn btn-default">
-                        <span class="glyphicon glyphicon-remove"></span> {# need to icon #}
-                    </a>
-                    <a href="{% url 'comment_approve' pk=comment.pk %}" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-ok"></span> {# need to icon #}
-                    </a>
+    <div class="d-flex flex-column">
+     <a href="{% url 'add_comment_to_post' pk=post.pk %}" class="flex-grow-4 button button-comment">Add comment</a>
+        <div class="block comment_theme flex-grow-1">
+            {% for comment in post.comments.all %}
+                {% if user.is_authenticated or comment.approved_comment %}
+                    {{ comment.create_date }}
+                    {% if not comment.approved_commed %}
+                        <a href="{% url 'comment_remove' pk=comment.pk %}" class="btn btn-default">
+                            <span class="glyphicon glyphicon-remove"></span> {# need to icon #}
+                        </a>
+                        <a href="{% url 'comment_approve' pk=comment.pk %}" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-ok"></span> {# need to icon #}
+                        </a>
+                    {% endif %}
+                    <p>{{ comment.text|safe|linebreaks }}</p>
+                    <p>Posted by: {{ comment.author }}</p>
                 {% endif %}
-                <p>{{ comment.text|safe|linebreaks }}</p>
-                <p>Posted by: {{ comment.author }}</p>
-            {% endif %}
-            {% empty %}
-            <p>No comments :(</p>
-        {% endfor %}
+                {% empty %}
+                <p>No comments :(</p>
+
+            {% endfor %}
+        </div>
     </div>
+
+
 
 {% endblock %}
 

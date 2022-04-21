@@ -56,7 +56,7 @@ class PostDeleteView(LoginRequiredMixin, DeleteView):
 
 class DraftListView(LoginRequiredMixin, ListView):
     login_url = '/login/'
-    redirect_field_name = 'blog/post_list.html'
+    redirect_field_name = 'blog/post_draft_list.html'
     model = Post
 
     def qet_queryset(self):
@@ -76,7 +76,7 @@ def post_publish(request, pk):
 
 @login_required
 def add_comment_to_post(request, pk):
-    post = add_comment_to_post(Post, pk=pk)
+    post = get_object_or_404(Post, pk=pk)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
