@@ -16,7 +16,7 @@
         <hr>
         {% if user.is_authenticated %}
             <div class="d-flex justify-content-between">
-                <a href="{% url 'post_edit' pk=post.pk %}" class="button button-edit">Edit</a>
+                <a href="{% url 'post_edit' pk=post.pk %}" class="button button-edit">Ediаt</a>
                 <a href="{% url 'post_remove' pk=post.pk %}" class="button button-remove">Remove</a>
             </div>
         {% endif %}
